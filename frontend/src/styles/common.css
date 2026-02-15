@@ -1,0 +1,176 @@
+/* ============================= */
+/* Layout Containers */
+/* ============================= */
+
+.page-container {
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+.page-container-sm {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+/* ============================= */
+/* Card */
+/* ============================= */
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* ============================= */
+/* List Items */
+/* ============================= */
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-text {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ============================= */
+/* Form */
+/* ============================= */
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* ============================= */
+/* Buttons */
+/* ============================= */
+
+.btn-primary {
+  width: 100%;
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+}
+
+/* ============================= */
+/* Badges */
+/* ============================= */
+
+.badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+}
+
+.badge-success {
+  background: #2ecc71;
+}
+
+.badge-danger {
+  background: #e74c3c;
+}
+
+/* ============================= */
+/* States */
+/* ============================= */
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+.success-message {
+  margin-top: 15px;
+  padding: 10px;
+  background: #2ecc71;
+  color: white;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+.btn-danger {
+  background: #e74c3c;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+}
+
+.btn-small {
+  font-size: 11px;
+  padding: 5px 8px;
+}
+
+.badge-danger {
+  background: #e74c3c;
+}
