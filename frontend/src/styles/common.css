@@ -190,3 +190,19 @@
 .badge-danger {
   background: #e74c3c;
 }
+
+.auth-redirect {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-redirect a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-redirect a:hover {
+  text-decoration: underline;
+}

@@ -123,7 +123,7 @@ python -m celery -A scheduled_orders beat --loglevel=info
 
 POST /api/auth/register/ POST /api/auth/login/
 
-Use: Authorization: Bearer `<access_token>`{=html}
+Use: Authorization: Bearer `<access_token>`
 
 ------------------------------------------------------------------------
 

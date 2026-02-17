@@ -41,6 +41,9 @@ export default function Login() {
             <button type="submit" className="btn-primary">Login</button>
           </center>
         </form>
+        <p className="auth-redirect">
+          Don't have an account? <Link to="/register">Register here</Link>
+        </p>
       </div>
     </div>
   );
