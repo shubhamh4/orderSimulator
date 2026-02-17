@@ -81,6 +81,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'scheduled_orders.wsgi.application'
 
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),

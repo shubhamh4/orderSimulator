@@ -1,10 +1,11 @@
 from rest_framework import viewsets, permissions
-from .models import ScheduledOrder, OrderExecution
-from .serializers import ScheduledOrderSerializer, OrderExecutionSerializer
+from .models import ScheduledOrder, OrderExecution, Product
+from .serializers import ScheduledOrderSerializer, OrderExecutionSerializer, ProductSerializer
 from django_celery_beat.models import IntervalSchedule, PeriodicTask
 import json
 from .services import create_or_update_periodic_task
-
+from rest_framework.generics import ListAPIView
+from rest_framework.authentication import get_authorization_header
 
 class ScheduledOrderViewSet(viewsets.ModelViewSet):
 
@@ -40,3 +41,10 @@ def perform_destroy(self, instance):
     task_name = f"scheduled_order_{instance.id}"
     PeriodicTask.objects.filter(name=task_name).delete()
     instance.delete()
+
+class ProductViewSet(viewsets.ModelViewSet):
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Product.objects.all()

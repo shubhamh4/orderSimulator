@@ -20,20 +20,28 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Username"
-          onChange={(e) => setForm({ ...form, username: e.target.value })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="page-container-sm">
+      <div className="card">
+        <h2 className="card-title">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              placeholder="Username"
+              onChange={(e) => setForm({ ...form, username: e.target.value })}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+            />
+          </div>
+          <center>
+            <button type="submit" className="btn-primary">Login</button>
+          </center>
+        </form>
+      </div>
     </div>
   );
 }

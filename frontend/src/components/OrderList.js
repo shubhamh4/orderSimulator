@@ -55,7 +55,7 @@ export default function OrderList() {
           orders.map((order) => (
             <div key={order.id} className="list-item">
               <div className="list-info">
-                <div>{order.product}</div>
+                <div>{order.product_name}</div>
                 <div className="sub-text">
                   {order.frequency}
                 </div>

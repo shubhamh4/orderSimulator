@@ -1,16 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../api";
 import "../styles/common.css";
 
 export default function OrderForm() {
+  const [products, setProducts] = useState([]);
+  const [success, setSuccess] = useState(false);
+
   const [form, setForm] = useState({
-    product: "Coffee",
+    product: "",
     quantity: 1,
     start_time: "",
     frequency: "daily",
   });
 
-  const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const res = await API.get("products/");
+      setProducts(res.data);
+
+      // Set first product as default
+      if (res.data.length > 0) {
+        setForm((prev) => ({
+          ...prev,
+          product: res.data[0].id,
+        }));
+      }
+    } catch (error) {
+      console.error("Failed to fetch products", error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +47,23 @@ export default function OrderForm() {
         <h3 className="card-title">Create Scheduled Order</h3>
 
         <form onSubmit={handleSubmit}>
+          {/* Product Dropdown */}
+          <div className="form-group">
+            <select
+              value={form.product}
+              onChange={(e) =>
+                setForm({ ...form, product: e.target.value })
+              }
+            >
+              {products.map((product) => (
+                <option key={product.id} value={product.id}>
+                  {product.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Quantity */}
           <div className="form-group">
             <input
               type="number"
@@ -36,6 +75,7 @@ export default function OrderForm() {
             />
           </div>
 
+          {/* Start Time */}
           <div className="form-group">
             <input
               type="datetime-local"
@@ -46,6 +86,7 @@ export default function OrderForm() {
             />
           </div>
 
+          {/* Frequency */}
           <div className="form-group">
             <select
               value={form.frequency}

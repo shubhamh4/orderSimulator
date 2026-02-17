@@ -1,9 +1,14 @@
 from rest_framework import serializers
-from .models import ScheduledOrder, OrderExecution
+from .models import ScheduledOrder, OrderExecution, Product
 
 
 class ScheduledOrderSerializer(serializers.ModelSerializer):
-
+    
+    product_name = serializers.CharField(
+        source="product.name",
+        read_only=True
+    )
+    
     class Meta:
         model = ScheduledOrder
         fields = '__all__'
@@ -18,3 +23,9 @@ class OrderExecutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderExecution
         fields = '__all__'
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ["id", "name"]
