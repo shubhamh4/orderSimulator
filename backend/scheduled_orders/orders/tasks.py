@@ -4,9 +4,15 @@ from django.utils import timezone
 from .models import ScheduledOrder, OrderExecution
 
 logger = logging.getLogger('orders')
+@shared_task
+def test_task():
+    print("TASK EXECUTED")
+    return "done"
 
 @shared_task(bind=True)
 def execute_scheduled_order(self, order_id):
+    scheduled_order = None
+
     try:
         logger.info(f"Starting execution for order ID: {order_id}")
 
@@ -38,9 +44,11 @@ def execute_scheduled_order(self, order_id):
         logger.error(f"Order ID {order_id} does not exist.")
 
     except Exception as e:
-        OrderExecution.objects.create(
-            scheduled_order=scheduled_order,
-            status='failed',
-            message=str(e)
-        )
         logger.exception(f"Execution failed for order {order_id}")
+
+        if scheduled_order:
+            OrderExecution.objects.create(
+                scheduled_order=scheduled_order,
+                status='failed',
+                message=str(e)
+            )

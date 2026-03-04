@@ -5,7 +5,11 @@ from django.utils import timezone
 
 
 def create_or_update_periodic_task(order: ScheduledOrder):
-
+    if timezone.is_naive(order.start_time):
+        order.start_time = timezone.make_aware(
+            order.start_time,
+            timezone.get_current_timezone()
+        )
     task_name = f"scheduled_order_{order.id}"
 
     # Delete existing task if exists

@@ -16,7 +16,18 @@ class ScheduledOrderViewSet(viewsets.ModelViewSet):
         return ScheduledOrder.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        order = serializer.save(user=self.request.user)
+        create_or_update_periodic_task(order)
+    
+    def perform_update(self, serializer):
+        order = serializer.save()
+        create_or_update_periodic_task(order)
+        
+    def perform_destroy(self, instance):
+        from django_celery_beat.models import PeriodicTask
+        task_name = f"scheduled_order_{instance.id}"
+        PeriodicTask.objects.filter(name=task_name).delete()
+        instance.delete()
 
 class OrderExecutionViewSet(viewsets.ReadOnlyModelViewSet):
 
@@ -27,20 +38,6 @@ class OrderExecutionViewSet(viewsets.ReadOnlyModelViewSet):
         return OrderExecution.objects.filter(
             scheduled_order__user=self.request.user
         )
-
-def perform_create(self, serializer):
-    order = serializer.save(user=self.request.user)
-    create_or_update_periodic_task(order)
-
-def perform_update(self, serializer):
-    order = serializer.save()
-    create_or_update_periodic_task(order)
-
-def perform_destroy(self, instance):
-    from django_celery_beat.models import PeriodicTask
-    task_name = f"scheduled_order_{instance.id}"
-    PeriodicTask.objects.filter(name=task_name).delete()
-    instance.delete()
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
